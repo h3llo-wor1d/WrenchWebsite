@@ -43,27 +43,23 @@ document.artBlog = `
     That's all for right now!
 </div>
 `
+
 document.musicBlog = `
 <div class="blogHeader">
     Recent Music Releases
 </div>
-<div class="blogBlock">
-    <img src="resources/img/ani/blog/omori.gif" ALIGN="left" width="90px" height="90px" />
-    <div class="blogText" >
-        I omor, sorry
-    </div>
-</div>
+<div id="blogMusicContainer" />
 `
 document.socialMedia = `
 <div class="blogHeader">
     Social Media
-</div><br/>
+</div>
 <div class="noselect blogBlock">
     <div class="blogSocial">
         <a href="https://twitter.com/h31lo_wor1d" class="blogA">
             <div class="blogSocialInterior">
                 <img src="resources/img/ani/socials/twitter.gif" width="90px" height="90px" style="vertical-align:middle; display: inline-block;" />
-                <div class="blogText" style=" display:inline-block;" >
+                <div class="blogText" style="display:inline-block;" >
                     Twitter
                 </div>
             </div>
@@ -72,14 +68,14 @@ document.socialMedia = `
 </div>
 <div class="noselect blogBlock">
     <div class="blogSocial">
-        <div class="blogSocialInterior">
-            <a href="https://discord.gg/pN6JqK4RXC" class="blogA">
+        <a href="https://discord.gg/pN6JqK4RXC" class="blogA">
+            <div class="blogSocialInterior">
                 <img src="resources/img/ani/socials/discord.gif" width="90px" height="90px" style="vertical-align:middle; display: inline-block;" />
-                <div class="blogText" style=" display:inline-block;" >
+                <div class="blogText" style="display:inline-block;" >
                     Discord
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
     </div>
 </div>
 `

@@ -90,6 +90,48 @@ function createDonates() {
     document.body.appendChild(el);
 }
 
+function getNewMusic() {
+    var spotToken = "Bearer BQD8c7V05JeDKB9lKFlIRqifIWaKqYylHoK1jZ5ip6wftPhVt8d0mD5GZ7SJQLpz4VJrrO5vISC_zUvFnPVBoVL40VyXORAIM48TtGGvS8ZWTugYMPrjmZu97_pw2WJSve5MggyhwgpWnp7o7Jz2n5_xg4jvKaUHQbHGaHDjsseyQmo3JrxIrSbQqORyk-IdcEk"; 
+    // Feel free to abuse this token, it literally only gets access to public playlists lmfao
+    // I'm too lazy to make a proper app for this, sorry lmao
+    
+    // Get first 10 unicode singles and/or albums that exist
+
+    fetch("https://api.spotify.com/v1/artists/5U3cvKez2zinfFgRlfuG0l/albums?include_groups=single%2Cappears_on&limit=10", {
+        headers: {
+            "Authorization": spotToken,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(resp => resp.json())
+    .then(data => {
+        let outDOM = "";
+        data.items.forEach(item => {
+            let artists = []
+            item.artists.forEach(artist => {
+                artists.push(`<a href="${artist.external_urls.spotify}">${artist.name}</a>`);
+            })
+            outDOM += `
+\n<div class="blogSocial">
+    <a href="${item.external_urls.spotify}" class="blogA">
+        <div class="blogSocialInterior_music">
+            <img src="${item.images[0].url}" width="90px" height="90px" style="display: inline-block;" />
+            <div style="position:relative;top:0;left:0;font-size: 20px;">
+                ${item.name}<br>
+                by ${artists.join(', ')}
+            </div>
+        </div>
+    </a>
+</div>  `
+        document.getElementById("blogMusicContainer").innerHTML = outDOM;
+        })
+    })
+}
+
+function isFloat(n){
+    return Number(n) === n && n % 1 !== 0;
+}
+
 function createBlog() {
     let items = [
         document.gamesBlog,
@@ -103,7 +145,15 @@ function createBlog() {
         el.className = "blog";
         el.innerHTML = items[i];
         blogDiv.appendChild(el);
+        // Ad addition logic
+        if (i !== 0 && i-1 % 2 === 0) {
+            var el = document.createElement('div');
+            el.className = "blogAd noselect";
+            el.innerHTML = `<a href="https://stoneforged.tech/?ref=272" class="blogA"><img src="resources/img/ads/stoneforged_ad.png" /></a>`;
+            blogDiv.appendChild(el);
+        }
     }
+    getNewMusic();
 }
 
 function runOnLoad() {
@@ -114,5 +164,5 @@ function runOnLoad() {
     var el = document.createElement('div');
     el.className = "overflowFixup";
     document.body.appendChild(el);
-    createPopup();
+    //createPopup();
 }

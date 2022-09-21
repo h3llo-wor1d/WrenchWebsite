@@ -1,10 +1,23 @@
-.blog {
-    margin-top: 15px;
-    overflow-y: auto;
-    height: 500px;
-    border: groove;
-    border-width: 8px;
-    width: 500px;
+@media screen and (max-width: 450px) {
+	.blog {
+        margin-top: 15px;
+        overflow-y: auto;
+        height: 500px;
+        border: groove;
+        border-width: 8px;
+        width: calc(100vw - 30px);
+    }
+}
+
+@media screen and (min-width: 455px) {
+	.blog {
+        margin-top: 15px;
+        overflow-y: auto;
+        height: 500px;
+        border: groove;
+        border-width: 8px;
+        width: 500px;
+    }
 }
 
 .blogHeader {
@@ -38,7 +51,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 75%;
+    width: 100vw;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
@@ -47,8 +60,38 @@
     column-gap: 15px;
 }
 
+.blogAd {
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.blogAd img:hover {
+    cursor: pointer;
+    opacity: .75;
+}
+
+.blogAd img:active {
+    cursor: pointer;
+    opacity: .5;
+}
+
+@media screen and (max-width: 450px) {
+	.blogAd img {
+        width: calc(100vw - 15px);
+    }
+}
+
+@media screen and (min-width: 455px) {
+	.blogAd img {
+        width: 650px;
+    }
+}
+
 .blogSocial {
-    width: fit-content;
+    width: 75%;
     height: fit-content;
     position: relative;
     left: 50%;
@@ -61,6 +104,7 @@
 .blogA {
     color: inherit;
     text-decoration: none;
+    text-align: center;
 }
 
 .blogSocial:hover {
@@ -72,6 +116,21 @@
     background-color: rgba(0,0,0,0.25);
 }
 
-.blogSocialInterior {
-    padding: 15px 60px 15px 60px;
+@media screen and (max-width: 450px) {
+	.blogSocialInterior_music {
+        display: grid;
+        grid-template-columns: 90px auto;
+        padding: 5px 20px 5px 20px;
+        column-gap: 30px;
+    }
 }
+
+@media screen and (min-width: 455px) {
+	.blogSocialInterior_music {
+        display: grid;
+        padding: 15px 60px 15px 60px;
+        grid-template-columns: 90px auto;
+        column-gap: 30px;
+    }
+}
+
