@@ -37,20 +37,26 @@ async function autoText() {
 }
 
 function genSpotToken() {
-    let payload = {
-        "grant_type": "client_credentials",
-        "client_id": 'b09e6b69ff5c48efaa09d43b37b36bee',
-        "client_secret": 'a07c18fb4744480389baec34d18b15a0'
-    }
-    fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: Object.keys(payload).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(payload[key])).join('&')
+    return new Promise((resolve, reject) => {
+        let payload = {
+            "grant_type": "client_credentials",
+            "client_id": 'b09e6b69ff5c48efaa09d43b37b36bee',
+            "client_secret": 'a07c18fb4744480389baec34d18b15a0'
+        }
+        fetch('https://accounts.spotify.com/api/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: Object.keys(payload).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(payload[key])).join('&')
+        })
+        .then(data => data.json())
+        .then(out => {
+            localStorage.setItem("accessToken", out.access_token)
+            resolve();
+        })
     })
-    .then(data => data.json())
-    .then(out => localStorage.setItem("accessToken", out.access_token))
+    
 }
 
 function removePopup() {
@@ -145,8 +151,9 @@ function getNewMusic() {
     .catch(() => {
         if (!retryCount > 10) {
             console.log("Got error, generating new token...");
-            genSpotToken();
-            getNewMusic();
+            genSpotToken().then(() => {
+                getNewMusic();
+            });
             retryCount++;
         }
     });
@@ -173,15 +180,23 @@ function createBlog() {
         // Ad addition logic
         if (i !== 0 && i-1 % 2 === 0) {
             var el = document.createElement('div');
-            el.className = "blogAd noselect";
-            el.innerHTML = `<a href="https://stoneforged.tech/?ref=272" class="blogA"><img src="resources/img/ads/stoneforged_ad.png" /></a>`;
+            el.className = "blogBads noselect";
+            el.innerHTML = `<a href="https://stoneforged.tech/?ref=272" class="blogA"><img src="resources/img/bads/sf_bads.png" /></a>`;
             blogDiv.appendChild(el);
         }
     }
-    getNewMusic();
+    if (!localStorage.getItem("accessToken")) {
+        genSpotToken().then(() => {
+            getNewMusic();
+        });
+    } else {
+        getNewMusic();
+    }
+    
 }
 
 function runOnLoad() {
+    
     headerElement = document.getElementById("autoHeader");
     textLoop(randint(5, 10));
     createBlog();

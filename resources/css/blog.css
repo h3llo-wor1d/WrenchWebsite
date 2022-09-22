@@ -60,7 +60,7 @@
     column-gap: 15px;
 }
 
-.blogAd {
+.blogBads {
     display: flex;
     width: 100vw;
     justify-content: center;
@@ -68,24 +68,24 @@
     margin-top: 15px;
 }
 
-.blogAd img:hover {
+.blogBads img:hover {
     cursor: pointer;
     opacity: .75;
 }
 
-.blogAd img:active {
+.blogBads img:active {
     cursor: pointer;
     opacity: .5;
 }
 
 @media screen and (max-width: 450px) {
-	.blogAd img {
+	.blogBads img {
         width: calc(100vw - 15px);
     }
 }
 
 @media screen and (min-width: 455px) {
-	.blogAd img {
+	.blogBads img {
         width: 650px;
     }
 }
