@@ -1,11 +1,16 @@
 var headerElement = null;
+var retryCount = 0; // Soft limit retries for spotify token to 10 for rate limit reasons.
 
+/*
 const allMessages = [
     "Powered by <a href='https://stoneforged.tech'>Stoneforged Technology</a>",
     "You've Won (nothing)!!!",
     "Shoutout to <a href='https://stoneforged.tech'>Stoneforged Technology</a> for fucking helping me pay my bills!",
     "Copybara.<br><img src='resources/img/popup/copybara.png' width='300px'/>"
 ]
+
+Maybe I'll re-add these in the future, but keeping these out for now...
+*/
 
 function randint(min, max) {
     return Math.random() * (max - min) + min;
@@ -29,6 +34,23 @@ async function autoText() {
         outText += possibleCharacters.charAt(randint(0, possibleCharacters.length))
     }
     headerElement.innerHTML = outText;
+}
+
+function genSpotToken() {
+    let payload = {
+        "grant_type": "client_credentials",
+        "client_id": 'b09e6b69ff5c48efaa09d43b37b36bee',
+        "client_secret": 'a07c18fb4744480389baec34d18b15a0'
+    }
+    fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: Object.keys(payload).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(payload[key])).join('&')
+    })
+    .then(data => data.json())
+    .then(out => localStorage.setItem("accessToken", out.access_token))
 }
 
 function removePopup() {
@@ -91,15 +113,9 @@ function createDonates() {
 }
 
 function getNewMusic() {
-    var spotToken = "Bearer BQD8c7V05JeDKB9lKFlIRqifIWaKqYylHoK1jZ5ip6wftPhVt8d0mD5GZ7SJQLpz4VJrrO5vISC_zUvFnPVBoVL40VyXORAIM48TtGGvS8ZWTugYMPrjmZu97_pw2WJSve5MggyhwgpWnp7o7Jz2n5_xg4jvKaUHQbHGaHDjsseyQmo3JrxIrSbQqORyk-IdcEk"; 
-    // Feel free to abuse this token, it literally only gets access to public playlists lmfao
-    // I'm too lazy to make a proper app for this, sorry lmao
-    
-    // Get first 10 unicode singles and/or albums that exist
-
     fetch("https://api.spotify.com/v1/artists/5U3cvKez2zinfFgRlfuG0l/albums?include_groups=single%2Cappears_on&limit=10", {
         headers: {
-            "Authorization": spotToken,
+            "Authorization": `Bearer ${localStorage.getItem("accessToken")}`,
             "Content-Type": "application/json"
         }
     })
@@ -126,7 +142,16 @@ function getNewMusic() {
         document.getElementById("blogMusicContainer").innerHTML = outDOM;
         })
     })
+    .catch(() => {
+        if (!retryCount > 10) {
+            console.log("Got error, generating new token...");
+            genSpotToken();
+            getNewMusic();
+            retryCount++;
+        }
+    });
 }
+
 
 function isFloat(n){
     return Number(n) === n && n % 1 !== 0;
