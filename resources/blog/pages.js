@@ -36,11 +36,37 @@ document.gamesBlog = `
 
 document.artBlog = `
 <div class="blogHeader">
-    Various Artworks Of Wrench
+    Stream Schedule (Week of 10/9)
 </div>
-<div class="blogImageContainer">
-    <img src="resources/img/blog/cari_art.jpg" style="max-width:85%;"/><br>
-    That's all for right now!
+<div class="blogBlock">
+    <img src="resources/img/sched/monday.png" ALIGN="left" width="90px" height="90px" />
+    <div class="blogText" >
+        Music Production<br>3:30PM EST
+    </div>
+</div>
+<div class="blogBlock">
+    <img src="resources/img/sched/tuesday.png" ALIGN="left" width="90px" height="90px" />
+    <div class="blogText" >
+        TBD
+    </div>
+</div>
+<div class="blogBlock">
+    <img src="resources/img/sched/wednesday.png" ALIGN="left" width="90px" height="90px" />
+    <div class="blogText" >
+        The Binding of Isaac<br>3:30PM EST
+    </div>
+</div>
+<div class="blogBlock">
+    <img src="resources/img/sched/thursday.png" ALIGN="left" width="90px" height="90px" />
+    <div class="blogText" >
+        TBD
+    </div>
+</div>
+<div class="blogBlock">
+    <img src="resources/img/sched/friday.png" ALIGN="left" width="90px" height="90px" />
+    <div class="blogText" >
+        Project Muse<br>3:30PM EST
+    </div>
 </div>
 `
 
