@@ -94,7 +94,7 @@ document.socialMedia = `
 </div>
 <div class="noselect blogBlock">
     <div class="blogSocial">
-        <a href="https://discord.gg/pN6JqK4RXC" class="blogA">
+        <a href="https://discord.gg/NQV4kh6gqg" class="blogA">
             <div class="blogSocialInterior">
                 <img src="resources/img/ani/socials/discord.gif" width="90px" height="90px" style="vertical-align:middle; display: inline-block;" />
                 <div class="blogText" style="display:inline-block;" >
