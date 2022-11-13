@@ -196,7 +196,6 @@ function createBlog() {
 }
 
 function runOnLoad() {
-    
     headerElement = document.getElementById("autoHeader");
     textLoop(randint(5, 10));
     createBlog();
@@ -204,5 +203,4 @@ function runOnLoad() {
     var el = document.createElement('div');
     el.className = "overflowFixup";
     document.body.appendChild(el);
-    //createPopup();
 }
