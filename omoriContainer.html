@@ -10,17 +10,47 @@
 
   <title>video player</title>
   <style type="text/css">
+    body {
+        margin: 0;
+    }
+    .video-container{
+        position: absolute;
+        margin: auto;
+        width: 480px;
+        height: 480px;
+        
+        background: black;
+        
+        overflow: hidden;
+        clip-path: 0 0;
+        transform: translatez(0);
+        }
     video {
-      width: 100%;
-      max-width: 600px;
-      height: auto;
+        transform: translatez(0);
+        position: absolute;
+        top: -100%;
+        bottom: -100%;
+        left: -100%;
+        right: -100%;    
+
+        margin: auto;
+
+        min-width: 100%;
+        min-height: 100%;
     }
   </style>
-
-  <video controls>
-    <source src="https://space-hey-files.s3.eu-west-1.amazonaws.com/Bad+End+Credits+Draft+4.webm" type="video/mp4">
-    Your browser does not support video
-  </video>
+    <div class="videoContainer">
+        <video 
+            src="https://space-hey-files.s3.eu-west-1.amazonaws.com/Bad+End+Credits+Draft+4.webm" 
+            type="video/mp4" 
+            autoplay="autoplay" 
+            controls
+            playsinline 
+            loop="loop" 
+            preload="auto" 
+        >
+        </video>
+    </div>
 
 </body>
 
