@@ -36,12 +36,12 @@ document.gamesBlog = `
 
 document.artBlog = `
 <div class="blogHeader">
-    Stream Schedule (Week of 10/9)
+    Stream Schedule
 </div>
 <div class="blogBlock">
     <img src="resources/img/sched/monday.png" ALIGN="left" width="90px" height="90px" />
     <div class="blogText" >
-        Music Production<br>3:30PM EST
+        TBD
     </div>
 </div>
 <div class="blogBlock">
@@ -53,7 +53,7 @@ document.artBlog = `
 <div class="blogBlock">
     <img src="resources/img/sched/wednesday.png" ALIGN="left" width="90px" height="90px" />
     <div class="blogText" >
-        The Binding of Isaac<br>3:30PM EST
+        TBD
     </div>
 </div>
 <div class="blogBlock">
@@ -65,7 +65,7 @@ document.artBlog = `
 <div class="blogBlock">
     <img src="resources/img/sched/friday.png" ALIGN="left" width="90px" height="90px" />
     <div class="blogText" >
-        Project Muse<br>3:30PM EST
+        TBD
     </div>
 </div>
 `
@@ -74,7 +74,7 @@ document.musicBlog = `
 <div class="blogHeader">
     Recent Music Releases
 </div>
-<div id="blogMusicContainer" />
+I am too lazy to fix this, LOL
 `
 document.socialMedia = `
 <div class="blogHeader">
