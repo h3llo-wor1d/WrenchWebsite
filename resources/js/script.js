@@ -59,11 +59,40 @@ function isFloat(n){
     return Number(n) === n && n % 1 !== 0;
 }
 
+let IMAGES = {
+    "discord": "https://discord.gg/abQtfTNzA5",
+    "nft": null,
+    "powered": null,
+    "transnow2": null,
+    "twitterbutton": "https://twitter.com/h31lo_wor1d",
+    "tyg": null,
+    "stoneforged": "https://stoneforged.tech"
+}
+
+function makeBanners() {
+    let parent = document.getElementById("footerContainer");
+    let imageKeys = Object.keys(IMAGES) 
+    for (var i in imageKeys) {
+        let child = document.createElement("a");
+        child.classList.add("inactive");
+        if (IMAGES[imageKeys[i]] !== null) {
+            child.classList.remove("inactive");
+            child.classList.add("active");
+            child.href = IMAGES[imageKeys[i]];
+            child.target = "_blank";
+        }
+        let t = document.createElement("img");
+        t.src = `resources/img/banners/${imageKeys[i]}.gif`
+        child.appendChild(t);
+        parent.appendChild(child);
+    }
+}
+
 function runOnLoad() {
     headerElement = document.getElementById("autoHeader");
     textLoop(randint(5, 10));
-    createDonates();
     var el = document.createElement('div');
     el.className = "overflowFixup";
     document.body.appendChild(el);
+    makeBanners();
 }
