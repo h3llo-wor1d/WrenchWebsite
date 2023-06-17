@@ -86,12 +86,12 @@ const testimonials = [
     {
         social: "AvolitionBrit",
         img: "avolition.jpg",
-        text: "A delight to work with, communicated effectively throughout the process and nailed the vibe I was going for."
+        text: "A delight to work with, communicated effectively and nailed the vibe I was going for."
     },
     {
         social: "GamersGoinBlind",
         img: "bravo.jpg",
-        text: " I highly recommend Wrench for any music ideas you have!! You won't be disappointed"
+        text: "I highly recommend Wrench for any music ideas you have!! You won't be disappointed"
     }
 ]
 
