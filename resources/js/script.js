@@ -92,6 +92,11 @@ const testimonials = [
         social: "GamersGoinBlind",
         img: "bravo.jpg",
         text: "I highly recommend Wrench for any music ideas you have!! You won't be disappointed"
+    },
+    {
+        social: "LordValdarox",
+        img: "valdarox.jpg",
+        text: "I've had the pleasure of working with Wrench on not 1, not 2, but 3 pieces!"
     }
 ]
 
