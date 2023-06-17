@@ -1,5 +1,4 @@
 var headerElement = null;
-var retryCount = 0; // Soft limit retries for spotify token to 10 for rate limit reasons.
 
 function randint(min, max) {
     return Math.random() * (max - min) + min;
@@ -7,6 +6,53 @@ function randint(min, max) {
 
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
+}
+
+function getAverageRGB(imgEl) {
+    // YOU CAN FUCKING DO THIS???
+
+    var blockSize = 5, // only visit every 5 pixels
+        defaultRGB = {r:0,g:0,b:0}, // for non-supporting envs
+        canvas = document.createElement('canvas'),
+        context = canvas.getContext && canvas.getContext('2d'),
+        data, width, height,
+        i = -4,
+        length,
+        rgb = {r:0,g:0,b:0},
+        count = 0;
+        
+    if (!context) {
+        return defaultRGB;
+    }
+    
+    height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
+    width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
+    
+    context.drawImage(imgEl, 0, 0);
+    
+    try {
+        data = context.getImageData(0, 0, width, height);
+    } catch(e) {
+        /* security error, img on diff domain */alert('x');
+        return defaultRGB;
+    }
+    
+    length = data.data.length;
+    
+    while ( (i += blockSize * 4) < length ) {
+        ++count;
+        rgb.r += data.data[i];
+        rgb.g += data.data[i+1];
+        rgb.b += data.data[i+2];
+    }
+    
+    // ~~ used to floor values
+    rgb.r = ~~(rgb.r/count);
+    rgb.g = ~~(rgb.g/count);
+    rgb.b = ~~(rgb.b/count);
+    
+    return rgb;
+    
 }
 
 async function autoText() {
@@ -76,7 +122,7 @@ const testimonials = [
     {
         social: "CiciPuppo",
         img: "cici.jpg",
-        text: "I loved working with Wrench! They made a BGM that fit my spooky vibe and was totally unique"
+        text: "I loved working with Wrench! She made a BGM that fit my spooky vibe and was totally unique"
     },
     {
         social: "IzzleShizzlePng",
@@ -97,6 +143,26 @@ const testimonials = [
         social: "LordValdarox",
         img: "valdarox.jpg",
         text: "I've had the pleasure of working with Wrench on not 1, not 2, but 3 pieces!"
+    },
+    {
+        social: "CorporateVTuber",
+        img: "corp.jpg",
+        text: "I'm so grateful for working with Wrench because her enthusiasm let me know she's just <i style=\"font-family: times_pix-semibold\">GOT</i> it."
+    },
+    {
+        social: "CallMeBurst",
+        img: "burst.jpg",
+        text: "If you've ever had a music-related fever dream and needed someone to make it <i style=\"font-family: times_pix-semibold\">fast</i>, Wrench is definitely the one to go to!"
+    },
+    {
+        social: "Kati0zi",
+        img: "katio.jpg",
+        text: "Wrench is casual, fun to work with, and excellent taste in music."
+    },
+    {
+        social: "LilTimmy9_",
+        img: "timmy.jpg",
+        text: "Wrench was very kind throughout the commission and made great music for me to use on stream!"
     }
 ]
 
@@ -121,14 +187,17 @@ function getTestimonial(blacklist) {
     }
 }
 
+const TESTIMONIAL_LEN = 3;
+
 function createTestimonials() {
     let blacklist = []
     let types = 0;
     let tests = document.getElementById("testimonials");
     try {
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < TESTIMONIAL_LEN; i++) {
             let testimonial = getTestimonial(blacklist);
             blacklist.push(testimonial.social);
+            //console.log(`Most prominent color of PFP is ${promColor}`);
             switch(types) {
                 case 0:
                     var el = document.createElement('tleft');
