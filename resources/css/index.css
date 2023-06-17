@@ -141,3 +141,140 @@ a:hover {
 a:active {
     color: darkgrey;
 }
+
+li {
+    margin: 0 0 15px 0;
+}
+
+.active {
+    color: gray;
+}
+
+tleft {
+    max-width: 100%;
+    width: 510px;
+    height: 70px;
+    position: relative;
+    grid-template-columns: 70px calc(100% - 70px);
+}
+
+tright {
+    max-width: 100%;
+    width: 510px;
+    height: 70px;
+    position: relative;
+    align-self: right;
+    justify-self: right;
+    grid-template-columns: calc(100% - 70px) 70px;
+    align-self: flex-end;
+}
+
+.testimonials {
+    flex-basis: 100%;
+    max-width: calc(100vw - 40px);
+    width: 1110px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+}
+
+.ttestl {
+    position: absolute;
+    left: 80px;
+    top: 0;
+    width: calc(100% - 80px);
+}
+
+.tclientl {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.ttestr {
+    width: calc(100% - 80px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: right;
+}
+
+.tclientr {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+@media screen and (max-width: 800px) {
+    .ttestr {
+        font-size: 11pt;
+    }
+
+    .ttestl {
+        font-size: 11pt;
+    }
+
+    .tclientr {
+        font-size: 9pt;
+    } 
+
+    .tclientl {
+        font-size: 9pt;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .ttestr {
+        font-size: 15pt;
+    }
+
+    .ttestl {
+        font-size: 15pt;
+    }
+
+    .tclientr {
+        font-size: 11pt;
+    } 
+    
+    .tclientl {
+        font-size: 11pt;
+    }
+}
+
+tright img {
+    position: absolute;
+    right: 0;
+}
+
+.toscontainer {
+    margin-top: -25px;
+    max-width: calc(100vw - 30px);
+    width: 1110px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.driveWidget {
+    text-align: center;
+    font-size: 14pt;
+    margin-top: 40px;
+    border-top: 3px dotted black;
+    width: calc(85vw);
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 40px;
+}
+
+.drive_container {
+    overflow: hidden;
+    width: 320px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
