@@ -8,53 +8,6 @@ function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
-function getAverageRGB(imgEl) {
-    // YOU CAN FUCKING DO THIS???
-
-    var blockSize = 5, // only visit every 5 pixels
-        defaultRGB = {r:0,g:0,b:0}, // for non-supporting envs
-        canvas = document.createElement('canvas'),
-        context = canvas.getContext && canvas.getContext('2d'),
-        data, width, height,
-        i = -4,
-        length,
-        rgb = {r:0,g:0,b:0},
-        count = 0;
-        
-    if (!context) {
-        return defaultRGB;
-    }
-    
-    height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
-    width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
-    
-    context.drawImage(imgEl, 0, 0);
-    
-    try {
-        data = context.getImageData(0, 0, width, height);
-    } catch(e) {
-        /* security error, img on diff domain */alert('x');
-        return defaultRGB;
-    }
-    
-    length = data.data.length;
-    
-    while ( (i += blockSize * 4) < length ) {
-        ++count;
-        rgb.r += data.data[i];
-        rgb.g += data.data[i+1];
-        rgb.b += data.data[i+2];
-    }
-    
-    // ~~ used to floor values
-    rgb.r = ~~(rgb.r/count);
-    rgb.g = ~~(rgb.g/count);
-    rgb.b = ~~(rgb.b/count);
-    
-    return rgb;
-    
-}
-
 async function autoText() {
     console.log("running autotext...")
     var possibleCharacters = "qwertyuiopasdfghjklzxcvbnm";
@@ -78,27 +31,6 @@ async function textLoop(loopCount) {
         await delay(150);
     }
     headerElement.innerHTML = "Wrench's Basement";
-}
-
-function createDonates() {
-    var el = document.createElement('div');
-    el.className = "adContainer";
-    el.innerHTML = `
-    <div class="noselect donateContainer">
-    <a href="https://ko-fi.com/h3llo_wor1d" style="color:inherit; text-decoration:none;" >
-        <div class="donateInterior">
-            Donate Money To Me!1!!!11!
-        </div>  
-    </a>
-    </div>
-    <div class="footer">
-        <a href="https://discord.gg/r5mw6zFpt5" target="_blank">Discord</a> 
-        <a href="https://twitter.com/h31lo_wor1d" target="_blank">Twitter</a> 
-        <a href="https://twitch.tv/h3llo_wor1d" target="_blank">Twitch</a><br>
-        Website written from the bottom up painstakingly by myself in HTML, source is available on GitHub <a href="https://github.com/h3llo-wor1d/wrenchWebsite" target="_blank">here</a>
-    </div>
-`
-    document.body.appendChild(el);
 }
 
 function isFloat(n){
@@ -193,75 +125,38 @@ function createTestimonials() {
     let blacklist = []
     let types = 0;
     let tests = document.getElementById("testimonials");
-    try {
-        for (let i = 0; i < TESTIMONIAL_LEN; i++) {
-            let testimonial = getTestimonial(blacklist);
-            blacklist.push(testimonial.social);
-            //console.log(`Most prominent color of PFP is ${promColor}`);
-            switch(types) {
-                case 0:
-                    var el = document.createElement('tleft');
-                    el.innerHTML = `
-    <img src=\"resources/img/clients/${testimonial.img}\" height=\"70px\">
-    <div class=\"ttestl\">
-        ${testimonial.text}
-    </div>
-    <div class=\"tclientl\">
-        <a href=\"https://twitter.com/${testimonial.social}\" target=\"_blank\">
-            @${testimonial.social}
-        </a> 
-    </div>
-    
-    `
-                    types = 1;
-                    tests.appendChild(el);
-                    break;
-                case 1:
-                    var el = document.createElement('tright');
-                    el.innerHTML = `
-    <div class=\"ttestr\">
-        ${testimonial.text}
-    </div>
-    <a class=\"tclientr\" target=\"_blank\" href=\"https://twitter.com/${testimonial.social}\">@${testimonial.social}</a>
-    <img src=\"resources/img/clients/${testimonial.img}\" height=\"70px\">
-                    `
-                    types = 0;
-                    tests.appendChild(el);
-                    break;
-            }
+    for (let i = 0; i < TESTIMONIAL_LEN; i++) {
+        let testimonial = getTestimonial(blacklist);
+        blacklist.push(testimonial.social);
+        //console.log(`Most prominent color of PFP is ${promColor}`);
+        switch(types) {
+            case 0:
+                var el = document.createElement('tleft');
+                el.innerHTML = `
+<img src=\"resources/img/clients/${testimonial.img}\" height=\"70px\">
+<div class=\"ttestl\">
+    ${testimonial.text}
+</div>
+<div class=\"tclientl\">
+    <a href=\"https://twitter.com/${testimonial.social}\" target=\"_blank\">@${testimonial.social}</a> 
+</div>
+`
+                types = 1;
+                tests.appendChild(el);
+                break;
+            case 1:
+                var el = document.createElement('tright');
+                el.innerHTML = `
+<div class=\"ttestr\">
+    ${testimonial.text}
+</div>
+<a class=\"tclientr\" target=\"_blank\" href=\"https://twitter.com/${testimonial.social}\">@${testimonial.social}</a>
+<img src=\"resources/img/clients/${testimonial.img}\" height=\"70px\">
+                `
+                types = 0;
+                tests.appendChild(el);
+                break;
         }
-    } catch (err) {
-        console.log('uhhhh')
-        console.log(err)
-    }
-}
-
-let IMAGES = {
-    "discord": "https://discord.gg/abQtfTNzA5",
-    "nft": null,
-    "powered": null,
-    "transnow2": null,
-    "twitterbutton": "https://twitter.com/h31lo_wor1d",
-    "tyg": null,
-    "stoneforged": "https://stoneforged.tech"
-}
-
-function makeBanners() {
-    let parent = document.getElementById("footerContainer");
-    let imageKeys = Object.keys(IMAGES) 
-    for (var i in imageKeys) {
-        let child = document.createElement("a");
-        child.classList.add("inactive");
-        if (IMAGES[imageKeys[i]] !== null) {
-            child.classList.remove("inactive");
-            child.classList.add("active");
-            child.href = IMAGES[imageKeys[i]];
-            child.target = "_blank";
-        }
-        let t = document.createElement("img");
-        t.src = `resources/img/banners/${imageKeys[i]}.gif`
-        child.appendChild(t);
-        parent.appendChild(child);
     }
 }
 
@@ -293,10 +188,6 @@ function runOnLoad() {
     }
     headerElement = document.getElementById("autoHeader");
     textLoop(randint(5, 10));
-    var el = document.createElement('div');
-    el.className = "overflowFixup";
-    document.body.appendChild(el);
-    //makeBanners();
     createTestimonials();
     postRandomComm();
 }

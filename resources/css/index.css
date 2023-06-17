@@ -28,27 +28,6 @@ body {
     transform: translateX(-50%);
 }
 
-.adContainer {
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 0;
-    margin-bottom: 25px;
-    z-index: 1;
-}
-
-.donateContainer {
-    width: 500px;
-    height: 70px;
-    animation: flashColor .40s infinite;
-    color: #000000;
-}
-
-marquee {
-    height: 100vh;
-    overflow: hidden;
-}
-
 .noselect {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -61,30 +40,6 @@ marquee {
 
 .uiButton:hover {
     cursor: pointer;
-}
-
-.donateInterior {
-    padding: 25px 25px 25px 25px;
-    text-align: center;
-    background-image: url("../img/ani/money.gif");
-}
-
-@keyframes flashColor {
-    0%, 50%{
-        background-color: red;
-    }   
-    51%, 100%{
-        background-color: yellow;
-    }
-}
-
-@keyframes blinkVis {
-    0%, 50% {
-        opacity: 1;
-    }
-    51%, 100%{
-        opacity: 0;
-    }
 }
 
 .footer {
@@ -277,4 +232,16 @@ tright img {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.tostext {
+    font-size: 22pt;
+    margin: 0px 15px 0px 15px;
+}
+
+.pageHeader {
+    text-align: center;
+    font-size: 22pt;
+    font-family: times_pix-semibold;
+    margin-bottom: 5px;
 }
